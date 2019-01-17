@@ -125,7 +125,7 @@ const playerMove = function (player) {
 }
 
 function endOfMatch() {
-    if ((btnPaper.disabled = true) || (btnRock.disabled = true) || (btnScissors.disabled = true)) {
+    if ((btnPaper.disabled) || (btnRock.disabled) || (btnScissors.disabled)) {
         output.innerHTML += '<br>Gra się zakończyła, naciśnij przycisk "Nowa Gra"';
     }
 }
