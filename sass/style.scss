@@ -36,3 +36,13 @@ button {
 	font-size: 30px;
 	font-weight: 900;
 }
+
+.btn-disabled {
+	border: 0;
+	color: white;
+	background: none;
+	background-color: #ababab;
+	box-shadow: none;
+	border-radius: 0px;
+	outline: none;
+}

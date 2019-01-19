@@ -9,6 +9,7 @@ var btnRock = document.getElementById('btn-rock');
 var btnScissors = document.getElementById('btn-scissors');
 var btnNewGame = document.getElementById('btn-new-game');
 
+var isGameBlocked = false;
 var roundsDeclared = 0;
 var roundCurrent = 0;
 var appMove = '';
@@ -24,23 +25,34 @@ btnNewGame.addEventListener('click', function () {
     scoreComputer = 0;
     playerPoints.innerHTML = '0';
     compPoints.innerHTML = '0';
-    btnPaper.disabled = false;
-    btnRock.disabled = false;
-    btnScissors.disabled = false;
+    enableGameButtons();
+    isGameBlocked = false;
 });
 btnPaper.addEventListener('click', function () {
+    if (isGameBlocked) {
+        endOfMatch();
+
+        return;
+    }
     playerMove('papier');
-    endOfMatch();
 });
 
 btnRock.addEventListener('click', function () {
+    if (isGameBlocked) {
+        endOfMatch();
+
+        return;
+    }
     playerMove('kamień');
-    endOfMatch();
 });
 
 btnScissors.addEventListener('click', function () {
+    if (isGameBlocked) {
+        endOfMatch();
+
+        return;
+    }
     playerMove('nożyce');
-    endOfMatch();
 });
 
 const drawNumber = function () {
@@ -99,15 +111,14 @@ const compareChoice = function (player, appMove) {
 
 const checkStatus = function () {
     if (roundsDeclared == scorePlayer || roundsDeclared == scoreComputer) {
-        btnPaper.disabled = true;
-        btnRock.disabled = true;
-        btnScissors.disabled = true;
+        disableGameButtons();
+        isGameBlocked = true;
         if (roundsDeclared == scorePlayer) {
             output.innerHTML = 'Wygrałeś mecz!';
             return;
         }
         if (roundsDeclared == scoreComputer) {
-            output.innerHTML = 'Przegałeś mecz!';
+            output.innerHTML = 'Przegrałeś mecz!';
             return;
         }
     }
@@ -125,7 +136,23 @@ const playerMove = function (player) {
 }
 
 function endOfMatch() {
-    if ((btnPaper.disabled) || (btnRock.disabled) || (btnScissors.disabled)) {
+    if (isGameBlocked) {
         output.innerHTML += '<br>Gra się zakończyła, naciśnij przycisk "Nowa Gra"';
     }
+}
+
+function enableGameButtons() {
+    btnPaper.classList.remove('btn-disabled');
+    btnRock.classList.remove('btn-disabled');
+    btnScissors.classList.remove('btn-disabled');
+}
+
+function disableGameButtons() {
+    // btnPaper.disabled = true;
+    // btnRock.disabled = true;
+    // btnScissors.disabled = true;
+
+    btnPaper.classList.add('btn-disabled');
+    btnRock.classList.add('btn-disabled');
+    btnScissors.classList.add('btn-disabled');
 }

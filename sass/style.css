@@ -37,13 +37,8 @@ button {
 }
 
 .btn-disabled {
-  border: 0;
-  color: white;
-  background: none;
   background-color: #ababab;
-  box-shadow: none;
-  border-radius: 0px;
-  outline: none;
+  color: white;
 }
 
 /*# sourceMappingURL=style.css.map */
