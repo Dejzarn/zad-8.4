@@ -28,32 +28,46 @@ btnNewGame.addEventListener('click', function () {
     enableGameButtons();
     isGameBlocked = false;
 });
-btnPaper.addEventListener('click', function () {
-    if (isGameBlocked) {
-        endOfMatch();
+// btnPaper.addEventListener('click', function () {
+//     if (isGameBlocked) {
+//         endOfMatch();
 
-        return;
-    }
-    playerMove('papier');
-});
+//         return;
+//     }
+//     playerMove('papier');
+// });
 
-btnRock.addEventListener('click', function () {
-    if (isGameBlocked) {
-        endOfMatch();
+// btnRock.addEventListener('click', function () {
+//     if (isGameBlocked) {
+//         endOfMatch();
 
-        return;
-    }
-    playerMove('kamień');
-});
+//         return;
+//     }
+//     playerMove('kamień');
+// });
 
-btnScissors.addEventListener('click', function () {
-    if (isGameBlocked) {
-        endOfMatch();
+// btnScissors.addEventListener('click', function () {
+//     if (isGameBlocked) {
+//         endOfMatch();
 
-        return;
-    }
-    playerMove('nożyce');
-});
+//         return;
+//     }
+//     playerMove('nożyce');
+// });
+
+var playerPickButton = document.querySelectorAll('.player-move');
+
+for (var i = 0; i < playerPickButton.length; i++) {
+    playerPickButton[i].addEventListener('click', function () {
+        if (isGameBlocked) {
+            endOfMatch();
+
+            return;
+        }
+        var dataMove = this.getAttribute('data-move');
+        playerMove(dataMove);
+    })
+}
 
 const drawNumber = function () {
     appMove = Math.ceil(Math.random() * 3);
