@@ -9,24 +9,32 @@ var btnRock = document.getElementById('btn-rock');
 var btnScissors = document.getElementById('btn-scissors');
 var btnNewGame = document.getElementById('btn-new-game');
 
-var isGameBlocked = false;
-var roundsDeclared = 0;
-var roundCurrent = 0;
+// var isGameBlocked = false;
+// var roundsDeclared = 0;
+// var roundCurrent = 0;
 var appMove = '';
 var player = '';
-var scorePlayer = 0;
-var scoreComputer = 0;
+// var scorePlayer = 0;
+// var scoreComputer = 0;
+
+var params = {
+    isGameBlocked: false,
+    roundsDeclared: 0,
+    // roundCurrent = 0,
+    scorePlayer: 0,
+    scoreComputer: 0
+};
 
 btnNewGame.addEventListener('click', function () {
-    roundsDeclared = prompt('Do ilu zwycięstw chcesz grać?');
-    winConditions.innerHTML = 'Gramy do <span style="color:green; font-size: 30px;">' + roundsDeclared + '</style></span> zwycięstw.';
+    params.roundsDeclared = prompt('Do ilu zwycięstw chcesz grać?');
+    winConditions.innerHTML = 'Gramy do <span style="color:green; font-size: 30px;">' + params.roundsDeclared + '</style></span> zwycięstw.';
     output.innerHTML = 'Niech<br> zacznie się<br> pojedynek!';
-    scorePlayer = 0;
-    scoreComputer = 0;
+    params.scorePlayer = 0;
+    params.scoreComputer = 0;
     playerPoints.innerHTML = '0';
     compPoints.innerHTML = '0';
     enableGameButtons();
-    isGameBlocked = false;
+    params.isGameBlocked = false;
 });
 // btnPaper.addEventListener('click', function () {
 //     if (isGameBlocked) {
@@ -59,7 +67,7 @@ var playerPickButton = document.querySelectorAll('.player-move');
 
 for (var i = 0; i < playerPickButton.length; i++) {
     playerPickButton[i].addEventListener('click', function () {
-        if (isGameBlocked) {
+        if (params.isGameBlocked) {
             endOfMatch();
 
             return;
@@ -90,48 +98,48 @@ const compareChoice = function (player, appMove) {
     }
     if (player === 'papier') {
         if (appMove === 'nożyce') {
-            scoreComputer++;
-            compPoints.innerHTML = scoreComputer;
+            params.scoreComputer++;
+            compPoints.innerHTML = params.scoreComputer;
             return 'Przegrana';
         } else {
-            scorePlayer++;
-            playerPoints.innerHTML = scorePlayer;
+            params.scorePlayer++;
+            playerPoints.innerHTML = params.scorePlayer;
             return 'Wygrałeś';
         }
     }
     if (player === 'nożyce') {
         if (appMove === 'kamień') {
-            scoreComputer++;
-            compPoints.innerHTML = scoreComputer;
+            params.scoreComputer++;
+            compPoints.innerHTML = params.scoreComputer;
             return 'Przegrana';
         } else {
-            scorePlayer++;
-            playerPoints.innerHTML = scorePlayer;
+            params.scorePlayer++;
+            playerPoints.innerHTML = params.scorePlayer;
             return 'Wygrałeś';
         }
     }
     if (player === 'kamień') {
         if (appMove === 'papier') {
-            scoreComputer++;
-            compPoints.innerHTML = scoreComputer;
+            params.scoreComputer++;
+            compPoints.innerHTML = params.scoreComputer;
             return 'Przegrana';
         } else {
-            scorePlayer++;
-            playerPoints.innerHTML = scorePlayer;
+            params.scorePlayer++;
+            playerPoints.innerHTML = params.scorePlayer;
             return 'Wygrałeś';
         }
     }
 }
 
 const checkStatus = function () {
-    if (roundsDeclared == scorePlayer || roundsDeclared == scoreComputer) {
+    if (params.roundsDeclared == params.scorePlayer || params.roundsDeclared == scoreComputer) {
         disableGameButtons();
-        isGameBlocked = true;
-        if (roundsDeclared == scorePlayer) {
+        params.isGameBlocked = true;
+        if (params.roundsDeclared == params.scorePlayer) {
             output.innerHTML = 'Wygrałeś mecz!';
             return;
         }
-        if (roundsDeclared == scoreComputer) {
+        if (params.roundsDeclared == params.scoreComputer) {
             output.innerHTML = 'Przegrałeś mecz!';
             return;
         }
@@ -150,7 +158,7 @@ const playerMove = function (player) {
 }
 
 function endOfMatch() {
-    if (isGameBlocked) {
+    if (params.isGameBlocked) {
         output.innerHTML += '<br>Gra się zakończyła, naciśnij przycisk "Nowa Gra"';
     }
 }
