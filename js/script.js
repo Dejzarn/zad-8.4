@@ -132,7 +132,7 @@ const compareChoice = function (player, appMove) {
 }
 
 const checkStatus = function () {
-    if (params.roundsDeclared == params.scorePlayer || params.roundsDeclared == scoreComputer) {
+    if (params.roundsDeclared == params.scorePlayer || params.roundsDeclared == params.scoreComputer) {
         disableGameButtons();
         params.isGameBlocked = true;
         if (params.roundsDeclared == params.scorePlayer) {
